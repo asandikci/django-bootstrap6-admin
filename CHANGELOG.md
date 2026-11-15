@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-15
+
+### Added
+
+- Soft fade-in/fade-out transition when switching between light, dark and auto
+  themes. The animation is skipped when `prefers-reduced-motion: reduce` is
+  set.
+
 ## [0.1.0] - 2026-11-15
 
 ### Added

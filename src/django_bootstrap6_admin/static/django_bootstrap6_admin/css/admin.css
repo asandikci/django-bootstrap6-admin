@@ -127,6 +127,31 @@ body.ba-body {
     line-height: 1.55;
 }
 
+/*
+ * Full-screen veil used by theme.js. The script fades it in over the current
+ * canvas colour, applies the new theme while the veil is opaque, then fades
+ * it out to reveal the new colours.
+ */
+.ba-theme-fade {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: var(--ba-canvas);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+}
+
+.ba-theme-fade.is-active {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ba-theme-fade {
+        transition: none;
+    }
+}
+
 #container.ba-app {
     display: flex;
     flex: 1 0 auto;

@@ -26,6 +26,8 @@ permissions and JavaScript remain in charge.
 - Modern login, logout and password change pages.
 - Light, dark and system themes. The existing Django `theme` localStorage
   preference is synchronised with Bootstrap's `data-bs-theme` attribute.
+- Soft fade-in/fade-out transition when switching themes, skipped
+  automatically for users who prefer reduced motion.
 - Accessible focus states, labels, table headers and ARIA attributes.
 - All Django admin JavaScript hooks are preserved: `actions.js`,
   `filters.js`, `nav_sidebar.js`, inlines, Select2/autocomplete, calendar

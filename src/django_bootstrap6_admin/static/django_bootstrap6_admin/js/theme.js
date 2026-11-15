@@ -7,7 +7,13 @@
 (() => {
     const STORAGE_KEY = "theme";
     const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const modes = ["auto", "light", "dark"];
+    const FADE_MS = 220; // Slightly longer than the 200ms CSS transition.
+
+    let overlay;
+    let fading = false;
+    let pendingMode = null;
 
     function normalize(mode) {
         return modes.includes(mode) ? mode : "auto";
@@ -54,10 +60,63 @@
         updateButtons(mode);
     }
 
+    function canvasColor() {
+        const bodyStyles = getComputedStyle(document.body);
+        if (bodyStyles.backgroundColor !== "rgba(0, 0, 0, 0)") {
+            return bodyStyles.backgroundColor;
+        }
+        return getComputedStyle(document.documentElement).backgroundColor;
+    }
+
+    function overlayElement() {
+        if (overlay) {
+            return overlay;
+        }
+        overlay = document.createElement("div");
+        overlay.className = "ba-theme-fade";
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.appendChild(overlay);
+        return overlay;
+    }
+
+    function transitionTo(mode) {
+        mode = normalize(mode);
+
+        if (reducedMotion.matches || !document.body) {
+            apply(mode);
+            return;
+        }
+
+        if (fading) {
+            pendingMode = mode;
+            return;
+        }
+
+        const element = overlayElement();
+        element.style.backgroundColor = canvasColor();
+        // Commit the transparent state so the following class change animates.
+        void element.offsetWidth;
+        element.classList.add("is-active");
+        fading = true;
+
+        window.setTimeout(() => {
+            apply(mode);
+            element.classList.remove("is-active");
+            window.setTimeout(() => {
+                fading = false;
+                const next = pendingMode;
+                pendingMode = null;
+                if (next && next !== mode) {
+                    transitionTo(next);
+                }
+            }, FADE_MS);
+        }, FADE_MS);
+    }
+
     function set(mode) {
         mode = normalize(mode);
         localStorage.setItem(STORAGE_KEY, mode);
-        apply(mode);
+        transitionTo(mode);
     }
 
     function cycle() {
@@ -99,7 +158,7 @@
     if (media.addEventListener) {
         media.addEventListener("change", () => {
             if (current() === "auto") {
-                apply("auto");
+                transitionTo("auto");
             }
         });
     }

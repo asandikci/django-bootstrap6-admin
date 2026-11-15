@@ -31,3 +31,18 @@ class PackageAssetsTests(SimpleTestCase):
         for asset in STATIC_ASSETS:
             with self.subTest(asset=asset):
                 self.assertIsNotNone(finders.find(asset))
+
+    def test_theme_transition_assets(self):
+        static_dir = Path(django_bootstrap6_admin.__file__).parent / "static"
+        theme_js = (static_dir / "django_bootstrap6_admin" / "js" / "theme.js").read_text(
+            encoding="utf-8"
+        )
+        admin_css = (static_dir / "django_bootstrap6_admin" / "css" / "admin.css").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("ba-theme-fade", theme_js)
+        self.assertIn("prefers-reduced-motion", theme_js)
+        self.assertIn(".ba-theme-fade", admin_css)
+        self.assertIn(".ba-theme-fade.is-active", admin_css)
+        self.assertIn("transition: opacity 200ms ease", admin_css)
