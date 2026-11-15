@@ -1,0 +1,33 @@
+from pathlib import Path
+
+from django.contrib.staticfiles import finders
+from django.template.loader import get_template
+from django.test import SimpleTestCase
+
+import django_bootstrap6_admin
+
+STATIC_ASSETS = (
+    "django_bootstrap6_admin/css/admin.css",
+    "django_bootstrap6_admin/css/widgets-overrides.css",
+    "django_bootstrap6_admin/js/admin.js",
+    "django_bootstrap6_admin/js/theme.js",
+    "django_bootstrap6_admin/vendor/bootstrap/css/bootstrap.min.css",
+    "django_bootstrap6_admin/vendor/bootstrap/js/bootstrap.bundle.min.js",
+    "django_bootstrap6_admin/vendor/bootstrap/LICENSE",
+)
+
+
+class PackageAssetsTests(SimpleTestCase):
+    def test_all_templates_compile(self):
+        templates_dir = Path(django_bootstrap6_admin.__file__).parent / "templates"
+        templates = sorted(templates_dir.rglob("*.html"))
+
+        self.assertTrue(templates)
+        for path in templates:
+            with self.subTest(template=path.name):
+                get_template(path.relative_to(templates_dir).as_posix())
+
+    def test_static_assets_are_discoverable(self):
+        for asset in STATIC_ASSETS:
+            with self.subTest(asset=asset):
+                self.assertIsNotNone(finders.find(asset))

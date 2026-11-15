@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-bootstrap6-admin"
+description = "A modern Bootstrap 6 skin for the Django admin."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+    { name = "Aliberk Sandıkçı", email = "git@asandikci.com" },
+]
+maintainers = [
+    { name = "Aliberk Sandıkçı", email = "git@asandikci.com" },
+]
+keywords = ["django", "admin", "bootstrap", "bootstrap6", "theme"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 6.1",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: User Interfaces",
+]
+dependencies = [
+    "Django>=6.1,<6.2",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "twine>=5",
+    "ruff>=0.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/asandikci/django-bootstrap6-admin"
+Repository = "https://github.com/asandikci/django-bootstrap6-admin"
+Issues = "https://github.com/asandikci/django-bootstrap6-admin/issues"
+Changelog = "https://github.com/asandikci/django-bootstrap6-admin/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+django_bootstrap6_admin = [
+    "templates/**/*.html",
+    "static/**/*",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "django_bootstrap6_admin.__version__" }
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["django_bootstrap6_admin"]
