@@ -16,6 +16,7 @@ permissions and JavaScript remain in charge.
 ## Features
 
 - Bootstrap 6 markup and design tokens throughout the admin.
+- "View site" is always available in the top bar, not buried in the user menu.
 - Sticky top bar with a collapsible sidebar (desktop) and drawer navigation
   with a backdrop (mobile).
 - Dashboard with application cards, model shortcuts and recent activity.
@@ -44,8 +45,8 @@ permissions and JavaScript remain in charge.
 - CSP-aware: bundled scripts and styles use Django 6.1's
   `{% csp_nonce_attr %}` tag, so nonce-based policies work out of the box.
 - Generic by design: no models, no migrations, no project-specific imports and
-  no assumptions about the host project's branding. The default navy/gold
-  palette is only a set of overridable CSS variables.
+  no assumptions about the host project's branding. The default warm
+  near-black/yellow palette is only a set of overridable CSS variables.
 
 ## Requirements
 
@@ -157,14 +158,15 @@ custom admin CSS file:
 
 ```css
 :root {
-    --ba-topbar-bg: #1f2937;
-    --ba-gold: #f59e0b;
+    --ba-topbar-bg: #231f20;
+    --ba-gold: #ffcb08;
+    --ba-canvas: #f6f6f4;
     --ba-sidebar-width: 300px;
 }
 ```
 
-The default primary and danger colours are deliberately deeper than Bootstrap
-6's defaults so white button text meets WCAG AA contrast.
+The default primary is the warm yellow accent with dark text, and the danger
+colour remains a deep red for readable white labels.
 
 The select controls use small `data:` SVG arrows. If you enable a strict CSP,
 allow `img-src 'self' data:` (or replace the arrows in your own CSS).
@@ -191,6 +193,16 @@ There is no runtime state to clean up.
     `678508b198d9b1b8877e338f419fdada00024be2bcc638a539dd724856095112`
   - `bootstrap.bundle.min.js`:
     `47ea447f46e288dd9d3e83147b7ba539c6df5192c047b8f91739cd56a5721148`
+
+### Language
+
+Django's admin is translated using the active language; it is not fixed to
+English. With `LANGUAGE_CODE = "tr"`, Django's own admin labels are Turkish,
+and this theme follows the same project language. The package's source strings
+are English and are translated when a matching locale is installed. To keep
+the admin in English while the public site uses another language, activate
+English for `/admin/` in your project (for example with a small middleware),
+or set `LANGUAGE_CODE = "en-us"` if the whole site should be English.
 
 ## Development
 

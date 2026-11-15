@@ -6,8 +6,8 @@
   <title>{% block title %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#172b45" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0c1520" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#231f20" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#242122" media="(prefers-color-scheme: dark)">
   <script src="{% static 'django_bootstrap6_admin/js/theme.js' %}" {% csp_nonce_attr %}></script>
   <link rel="stylesheet" href="{% static 'django_bootstrap6_admin/vendor/bootstrap/css/bootstrap.min.css' %}" {% csp_nonce_attr %}>
   <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}" {% csp_nonce_attr %}>
@@ -48,58 +48,60 @@
           </div>
 
           {% block usertools %}
-            {% if has_permission %}
+            {% if site_url or has_permission %}
               <div id="user-tools" class="ba-user-tools">
-                {% include "admin/color_theme_toggle.html" %}
-                {% firstof user.get_short_name user.get_username as user_name %}
-                <div class="ba-user-menu-wrap">
-                  <button type="button" class="btn btn-outline theme-secondary ba-user-menu-button"
-                          data-bs-toggle="menu" data-bs-target="#ba-user-menu"
-                          aria-expanded="false" aria-haspopup="true">
-                    <span class="visually-hidden">{% translate 'User menu' %}</span>
-                    <span class="ba-user-avatar" aria-hidden="true">{{ user_name|first|upper }}</span>
-                    <span class="ba-user-name">{% firstof user.get_short_name user.get_username %}</span>
-                    <svg class="ba-icon ba-chevron" aria-hidden="true"><use href="#ba-chevron-down"></use></svg>
-                  </button>
-                  <div class="menu ba-user-menu" id="ba-user-menu">
-                    {% block welcome-msg %}
-                      <div class="menu-header">
-                        {% translate 'Welcome,' %} <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-                      </div>
-                    {% endblock %}
-                    {% block userlinks %}
-                      {% if site_url %}
-                        <a class="menu-item" href="{{ site_url }}">
-                          <svg class="ba-icon" aria-hidden="true"><use href="#ba-external"></use></svg>
-                          {% translate 'View site' %}
-                        </a>
-                      {% endif %}
-                      {% if user.is_active and user.is_staff %}
-                        {% url 'django-admindocs-docroot' as docsroot %}
-                        {% if docsroot %}
-                          <a class="menu-item" href="{{ docsroot }}">
-                            <svg class="ba-icon" aria-hidden="true"><use href="#ba-document"></use></svg>
-                            {% translate 'Documentation' %}
+                {% if site_url %}
+                  <a class="btn btn-outline ba-view-site" href="{{ site_url }}">
+                    <svg class="ba-icon" aria-hidden="true"><use href="#ba-external"></use></svg>
+                    <span class="ba-view-site-label">{% translate 'View site' %}</span>
+                  </a>
+                {% endif %}
+                {% if has_permission %}
+                  {% include "admin/color_theme_toggle.html" %}
+                  {% firstof user.get_short_name user.get_username as user_name %}
+                  <div class="ba-user-menu-wrap">
+                    <button type="button" class="btn btn-outline theme-secondary ba-user-menu-button"
+                            data-bs-toggle="menu" data-bs-target="#ba-user-menu"
+                            aria-expanded="false" aria-haspopup="true">
+                      <span class="visually-hidden">{% translate 'User menu' %}</span>
+                      <span class="ba-user-avatar" aria-hidden="true">{{ user_name|first|upper }}</span>
+                      <span class="ba-user-name">{% firstof user.get_short_name user.get_username %}</span>
+                      <svg class="ba-icon ba-chevron" aria-hidden="true"><use href="#ba-chevron-down"></use></svg>
+                    </button>
+                    <div class="menu ba-user-menu" id="ba-user-menu">
+                      {% block welcome-msg %}
+                        <div class="menu-header">
+                          {% translate 'Welcome,' %} <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+                        </div>
+                      {% endblock %}
+                      {% block userlinks %}
+                        {% if user.is_active and user.is_staff %}
+                          {% url 'django-admindocs-docroot' as docsroot %}
+                          {% if docsroot %}
+                            <a class="menu-item" href="{{ docsroot }}">
+                              <svg class="ba-icon" aria-hidden="true"><use href="#ba-document"></use></svg>
+                              {% translate 'Documentation' %}
+                            </a>
+                          {% endif %}
+                        {% endif %}
+                        {% if user.has_usable_password %}
+                          <a class="menu-item" href="{% url 'admin:password_change' %}">
+                            <svg class="ba-icon" aria-hidden="true"><use href="#ba-key"></use></svg>
+                            {% translate 'Change password' %}
                           </a>
                         {% endif %}
-                      {% endif %}
-                      {% if user.has_usable_password %}
-                        <a class="menu-item" href="{% url 'admin:password_change' %}">
-                          <svg class="ba-icon" aria-hidden="true"><use href="#ba-key"></use></svg>
-                          {% translate 'Change password' %}
-                        </a>
-                      {% endif %}
-                      <div class="menu-divider"></div>
-                      <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="menu-item">
-                          <svg class="ba-icon" aria-hidden="true"><use href="#ba-logout"></use></svg>
-                          {% translate 'Log out' %}
-                        </button>
-                      </form>
-                    {% endblock %}
+                        <div class="menu-divider"></div>
+                        <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                          {% csrf_token %}
+                          <button type="submit" class="menu-item">
+                            <svg class="ba-icon" aria-hidden="true"><use href="#ba-logout"></use></svg>
+                            {% translate 'Log out' %}
+                          </button>
+                        </form>
+                      {% endblock %}
+                    </div>
                   </div>
-                </div>
+                {% endif %}
               </div>
             {% endif %}
           {% endblock %}

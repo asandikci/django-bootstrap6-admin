@@ -61,4 +61,6 @@ class PackageAssetsTests(SimpleTestCase):
         self.assertIn("ba-filters-collapsed", admin_css)
         self.assertIn("border-inline-end: 1px solid var(--bs-border-muted)", admin_css)
         self.assertIn("appearance: none", admin_css)
-        self.assertIn("--bs-fg-4: #9fb1c4", admin_css)
+        self.assertIn("--bs-fg-4: #b0aaa9", admin_css)
+        self.assertIn("--ba-topbar-bg: light-dark(#231f20, #242122)", admin_css)
+        self.assertIn("--bs-primary-bg: light-dark(#ffcb08, #d8ab32)", admin_css)

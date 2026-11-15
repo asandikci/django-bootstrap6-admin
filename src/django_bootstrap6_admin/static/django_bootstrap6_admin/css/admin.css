@@ -12,42 +12,45 @@
     --ba-sidebar-width: 272px;
     --ba-content-max: 1600px;
 
-    --ba-topbar-bg: light-dark(#172b45, #0c1520);
-    --ba-topbar-fg: light-dark(#f3f7fb, #e5edf6);
-    --ba-topbar-muted: light-dark(#aebed0, #9fb0c2);
-    --ba-canvas: light-dark(#f4f6f9, #0d141c);
-    --ba-surface: light-dark(#ffffff, #151f2b);
-    --ba-surface-muted: light-dark(#f8fafc, #111a24);
-    --ba-border: light-dark(#dce3eb, #2d3a4b);
-    --ba-border-strong: light-dark(#c6d0dc, #3b4b5f);
-    --ba-gold: light-dark(#c99b54, #d6b46f);
-    --ba-shadow-sm: 0 1px 2px rgb(23 43 69 / 0.06);
-    --ba-shadow-md: 0 0.5rem 1.5rem rgb(23 43 69 / 0.08);
-    --ba-shadow-lg: 0 1rem 3rem rgb(23 43 69 / 0.16);
-    --ba-radius: var(--bs-radius-7);
-    --ba-radius-sm: var(--bs-radius-5);
-    --ba-text-muted: light-dark(#536274, #b3bfcd);
-    --ba-control-border: light-dark(#7f8d9d, #6b7d91);
+    --ba-topbar-bg: light-dark(#231f20, #242122);
+    --ba-topbar-fg: light-dark(#f6f4f4, #f2efef);
+    --ba-topbar-muted: light-dark(#d8d3d2, #c6c0c0);
+    --ba-canvas: light-dark(#f6f6f4, #191718);
+    --ba-surface: light-dark(#ffffff, #222021);
+    --ba-surface-muted: light-dark(#fafaf8, #292627);
+    --ba-border: light-dark(#e3e3df, #3a3637);
+    --ba-border-strong: light-dark(#cfcfc8, #4a4546);
+    --ba-gold: light-dark(#ffcb08, #d8ab32);
+    --ba-shadow-sm: 0 1px 2px rgb(35 31 32 / 0.05);
+    --ba-shadow-md: 0 0.35rem 1rem rgb(35 31 32 / 0.07);
+    --ba-shadow-lg: 0 0.75rem 2rem rgb(35 31 32 / 0.12);
+    --ba-radius: 6px;
+    --ba-radius-sm: 4px;
+    --ba-text-muted: light-dark(#65605f, #c6c0c0);
+    --ba-control-border: light-dark(#b8b3ad, #6b6464);
 
     /*
-     * Bootstrap 6's default primary is a very bright blue; white text on it
-     * only reaches ~3.5:1. Use a deeper, accessible blue for light mode and a
-     * slightly lighter one for dark mode.
+     * The Pardus Teknofest palette uses a warm near-black surface and a
+     * saturated yellow accent with dark text. Keep the primary role usable as
+     * an accent rather than a blue action colour.
      */
-    --bs-primary-base: light-dark(#315e9b, #3f6ea8);
-    --bs-primary-bg: light-dark(#315e9b, #3f6ea8);
-    --bs-primary-contrast: #fff;
-    --bs-primary-fg: light-dark(#244a7d, #a9c8ec);
-    --bs-primary-fg-emphasis: light-dark(#1d3c66, #cfe1f7);
-    --bs-primary-bg-subtle: light-dark(#eaf0f7, #23364b);
-    --bs-primary-bg-muted: light-dark(#d9e4f1, #2f4a66);
-    --bs-primary-border: light-dark(#6688b0, #6f95b8);
-    --bs-secondary-border: light-dark(#8a97a6, #6b7d91);
+    --bs-primary-base: light-dark(#ffcb08, #d8ab32);
+    --bs-primary-bg: light-dark(#ffcb08, #d8ab32);
+    --bs-primary-contrast: #231f20;
+    --bs-primary-fg: light-dark(#7a5a00, #e8c66e);
+    --bs-primary-fg-emphasis: light-dark(#5f4600, #f3d98f);
+    --bs-primary-bg-subtle: light-dark(#fff6d6, #342c18);
+    --bs-primary-bg-muted: light-dark(#ffeaa1, #4a3d1e);
+    --bs-primary-border: light-dark(#d4a900, #8a6a19);
+    --bs-secondary-border: light-dark(#b8b3ad, #6b6464);
     --bs-primary-focus-ring: color-mix(
         in oklch,
-        var(--bs-primary-bg) 55%,
-        var(--bs-bg-body)
+        var(--bs-primary-bg) 45%,
+        transparent
     );
+    --bs-link-color: light-dark(#8a6500, #e8c66e);
+    --bs-link-hover-color: light-dark(#6f5000, #f3d98f);
+    --bs-border-muted: light-dark(#e3e3df, #3a3637);
 
     --bs-danger-base: light-dark(#b4233a, #c23a53);
     --bs-danger-bg: light-dark(#b4233a, #c23a53);
@@ -62,8 +65,8 @@
         var(--bs-danger-bg) 55%,
         var(--bs-bg-body)
     );
-    --ba-select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667085' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-    --ba-select-arrow-dark: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23aab6c5' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --ba-select-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%237a7472' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --ba-select-arrow-dark: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c6c0c0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
 
     /* Django admin CSS variables used by widgets.css / autocomplete.css. */
     --primary: var(--bs-primary-bg);
@@ -118,14 +121,14 @@
  */
 [data-bs-theme="dark"],
 [data-effective-theme="dark"] {
-    --bs-fg-1: #f1f5f9;
-    --bs-fg-2: #d7e0ea;
-    --bs-fg-3: #b9c7d6;
-    --bs-fg-4: #9fb1c4;
-    --ba-text-muted: #c9d4e0;
-    --bs-link-color: #8dbcf7;
-    --bs-link-hover-color: #b7d4ff;
-    --bs-border-muted: #34465a;
+    --bs-fg-1: #f2efef;
+    --bs-fg-2: #dedada;
+    --bs-fg-3: #c6c0c0;
+    --bs-fg-4: #b0aaa9;
+    --ba-text-muted: #c6c0c0;
+    --bs-link-color: #e8c66e;
+    --bs-link-hover-color: #f3d98f;
+    --bs-border-muted: #3a3637;
 }
 
 html {
@@ -370,14 +373,9 @@ samp {
     inset-inline-start: 0;
     width: 100%;
     height: 3px;
-    background: linear-gradient(
-        90deg,
-        var(--ba-gold) 0,
-        var(--ba-gold) 4.5rem,
-        transparent 4.5rem
-    );
+    background: var(--ba-gold);
     content: "";
-    opacity: 0.9;
+    opacity: 1;
     pointer-events: none;
 }
 
@@ -438,13 +436,12 @@ samp {
     place-items: center;
     width: 2.35rem;
     height: 2.35rem;
-    border-radius: 0.65rem;
-    background: #fff;
-    color: var(--ba-topbar-bg);
+    border-radius: var(--ba-radius-sm);
+    background: var(--ba-gold);
+    color: #231f20;
     font-size: 1.05rem;
     font-weight: 800;
     line-height: 1;
-    box-shadow: 0 2px 0 rgb(0 0 0 / 0.12);
 }
 
 .ba-brand-text {
@@ -479,6 +476,32 @@ samp {
     margin-inline-start: auto;
 }
 
+.ba-view-site {
+    --bs-btn-color: var(--ba-topbar-fg);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: rgb(255 255 255 / 0.22);
+    --bs-btn-hover-bg: rgb(255 255 255 / 0.1);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-border-color: rgb(255 255 255 / 0.38);
+    --bs-btn-active-bg: rgb(255 255 255 / 0.16);
+    --bs-btn-active-color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2.35rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--ba-radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ba-view-site .ba-icon {
+    width: 0.9rem;
+    height: 0.9rem;
+}
+
 .ba-theme-toggle {
     --bs-btn-color: var(--ba-topbar-fg);
     --bs-btn-bg: transparent;
@@ -490,7 +513,7 @@ samp {
     --bs-btn-active-color: #fff;
     width: 2.35rem;
     height: 2.35rem;
-    border-radius: 50%;
+    border-radius: var(--ba-radius-sm);
 }
 
 #branding > .ba-theme-toggle {
@@ -539,7 +562,7 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
     --bs-btn-active-color: #fff;
     min-height: 2.35rem;
     padding: 0.25rem 0.55rem 0.25rem 0.3rem;
-    border-radius: 999px;
+    border-radius: var(--ba-radius-sm);
 }
 
 .ba-user-avatar {
@@ -550,7 +573,7 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
     height: 1.8rem;
     border-radius: 50%;
     background: var(--ba-gold);
-    color: #172b45;
+    color: #231f20;
     font-size: 0.78rem;
     font-weight: 800;
 }
@@ -1635,7 +1658,8 @@ a.ba-date-chip:focus {
     background-size: 0.65rem;
 }
 
-[data-bs-theme="dark"] #result_list select {
+[data-bs-theme="dark"] #result_list select,
+[data-effective-theme="dark"] #result_list select {
     background-image: var(--ba-select-arrow-dark);
 }
 
@@ -2218,7 +2242,10 @@ label.required::after {
 
 [data-bs-theme="dark"] .ba-field select,
 [data-bs-theme="dark"] .ba-form-group select,
-[data-bs-theme="dark"] .ba-actions select {
+[data-bs-theme="dark"] .ba-actions select,
+[data-effective-theme="dark"] .ba-field select,
+[data-effective-theme="dark"] .ba-form-group select,
+[data-effective-theme="dark"] .ba-actions select {
     background-image: var(--ba-select-arrow-dark);
 }
 
@@ -2591,7 +2618,8 @@ div.help ul {
     background-size: 0.65rem;
 }
 
-[data-bs-theme="dark"] .ba-inline-table select {
+[data-bs-theme="dark"] .ba-inline-table select,
+[data-effective-theme="dark"] .ba-inline-table select {
     background-image: var(--ba-select-arrow-dark);
 }
 
@@ -2939,7 +2967,7 @@ body.login .ba-topbar-inner {
     padding: 2.5rem;
     border-radius: calc(var(--ba-radius) + 0.25rem);
     background:
-        radial-gradient(circle at 18% 18%, rgb(201 155 84 / 0.2), transparent 42%),
+        radial-gradient(circle at 18% 18%, rgb(255 203 8 / 0.18), transparent 42%),
         var(--ba-topbar-bg);
     color: var(--ba-topbar-fg);
     box-shadow: var(--ba-shadow-lg);
@@ -2961,9 +2989,9 @@ body.login .ba-topbar-inner {
     place-items: center;
     width: 3rem;
     height: 3rem;
-    border-radius: 0.8rem;
-    background: #fff;
-    color: var(--ba-topbar-bg);
+    border-radius: var(--ba-radius);
+    background: var(--ba-gold);
+    color: #231f20;
     font-size: 1.3rem;
     font-weight: 800;
 }
@@ -3388,6 +3416,15 @@ body.popup .ba-submit-row {
 
     .ba-user-menu-button {
         padding-inline: 0.25rem;
+    }
+
+    .ba-view-site {
+        width: 2.35rem;
+        padding: 0;
+    }
+
+    .ba-view-site-label {
+        display: none;
     }
 
     .ba-brand-title {

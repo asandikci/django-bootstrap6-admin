@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-15
+
+### Added
+
+- The "View site" link is now always visible in the admin top bar instead of
+  being hidden in the user menu.
+
+### Changed
+
+- Refreshed the palette and surface treatment to match the warm near-black and
+  yellow visual language of the Pardus Teknofest project.
+- Updated the login screen brand mark and browser theme colour to the new
+  palette.
+- Documented that the admin follows Django's active language instead of being
+  hard-coded to English.
+
 ## [0.2.0] - 2026-11-15
 
 ### Added
