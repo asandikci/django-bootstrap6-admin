@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-15
+
+### Added
+
+- Body-level breadcrumb navigation on every admin page, including the
+  dashboard; subpages keep the nested `Home > App > Model` trail.
+- Dashboard search that filters application and model names as you type.
+- Collapsible dashboard categories with remembered state across pages.
+- Up to 10 recent actions, with the card stretching to the dashboard height
+  and scrolling internally when needed.
+
+### Changed
+
+- Removed the left navigation sidebar and hamburger drawer on every admin page.
+  Content now uses the full width.
+- Dashboard category cards now use an aligned icon rail with a vertical rule,
+  higher-contrast letter plates and zebra row backgrounds.
+- Model view/add/edit buttons are always visible with stronger borders and
+  backgrounds in both themes.
+- Dashboard cards remain in a vertical list, with recent actions adjacent on
+  the right.
+
+### Removed
+
+- The `nav_sidebar.html` and `app_list.html` templates and the Django
+  `nav_sidebar.js` dependency.
+
 ## [0.2.8] - 2026-11-15
 
 ### Changed

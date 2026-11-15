@@ -36,13 +36,6 @@
     {% block header %}
       <header id="header" class="ba-topbar">
         <div class="ba-topbar-inner">
-          <button type="button" class="btn btn-icon ba-sidebar-toggle" id="ba-sidebar-toggle"
-                  aria-controls="nav-sidebar" aria-expanded="false"
-                  title="{% translate 'Toggle navigation' %}">
-            <svg class="ba-icon" aria-hidden="true"><use href="#ba-menu"></use></svg>
-            <span class="visually-hidden">{% translate 'Toggle navigation' %}</span>
-          </button>
-
           <div id="branding" class="ba-branding">
             {% block branding %}{% endblock %}
           </div>
@@ -133,12 +126,6 @@
   {% endif %}
 
   <div class="main" id="main">
-    {% if not is_popup and is_nav_sidebar_enabled %}
-      {% block nav-sidebar %}
-        {% include "admin/nav_sidebar.html" %}
-      {% endblock %}
-    {% endif %}
-
     <main id="content-start" class="content" tabindex="-1">
       {% block messages %}
         {% if messages %}
@@ -171,7 +158,6 @@
   </div>
 
   {% if not is_popup %}
-    <div id="ba-sidebar-backdrop" class="ba-sidebar-backdrop" hidden></div>
     <footer id="footer" class="ba-footer">
       {% block footer %}
         <span>{% blocktranslate %}Powered by Django{% endblocktranslate %}</span>
@@ -213,9 +199,6 @@
 </svg>
 
 <script type="module" src="{% static 'django_bootstrap6_admin/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" {% csp_nonce_attr %}></script>
-{% if not is_popup and is_nav_sidebar_enabled %}
-  <script src="{% static 'admin/js/nav_sidebar.js' %}" defer {% csp_nonce_attr %}></script>
-{% endif %}
 <script src="{% static 'django_bootstrap6_admin/js/admin.js' %}" defer {% csp_nonce_attr %}></script>
 {% block extrabody %}{% endblock extrabody %}
 </body>

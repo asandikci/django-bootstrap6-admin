@@ -50,6 +50,13 @@ class AdminUiTests(TestCase):
         self.assertContains(response, "ba-recent-card")
         self.assertContains(response, "theme-toggle")
         self.assertContains(response, "ba-view-site")
+        self.assertContains(response, "ba-dashboard-search")
+        self.assertContains(response, "ba-app-collapse")
+        self.assertContains(response, "ba-icon-rail")
+        self.assertContains(response, "ba-breadcrumb-nav")
+        self.assertNotContains(response, 'id="nav-sidebar"')
+        self.assertNotContains(response, "ba-sidebar-toggle")
+        self.assertNotContains(response, "nav_sidebar.js")
         self.assertEqual(
             response.content.decode().count('class="btn btn-outline ba-view-site"'),
             1,
@@ -148,6 +155,41 @@ class AdminUiTests(TestCase):
 
         response = self.client.get(url, {"_facets": "1"})
         self.assertContains(response, "Hide counts")
+
+    def test_dashboard_recent_actions_are_capped_at_ten(self):
+        for index in range(12):
+            LogEntry.objects.log_actions(
+                user_id=self.user.pk,
+                queryset=[self.book],
+                action_flag=CHANGE,
+                change_message=f"Dashboard entry {index}",
+                single_object=True,
+            )
+
+        response = self.client.get(reverse("admin:index"))
+
+        self.assertEqual(
+            response.content.decode().count('class="ba-timeline-item'),
+            10,
+        )
+
+    def test_sidebar_is_hidden_on_all_admin_pages(self):
+        urls = (
+            reverse("admin:index"),
+            reverse("admin:testapp_book_changelist"),
+            reverse("admin:testapp_book_change", args=[self.book.pk]),
+        )
+        for url in urls:
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertNotContains(response, 'id="nav-sidebar"')
+                self.assertNotContains(response, "ba-sidebar-toggle")
+                self.assertNotContains(response, "nav_sidebar.js")
+
+        self.client.logout()
+        response = self.client.get(reverse("admin:login"))
+        self.assertNotContains(response, 'id="nav-sidebar"')
+        self.assertNotContains(response, "ba-sidebar-toggle")
 
     def test_change_form_keeps_widgets_and_submit_contract(self):
         response = self.client.get(reverse("admin:testapp_book_change", args=[self.book.pk]))

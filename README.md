@@ -17,12 +17,15 @@ permissions and JavaScript remain in charge.
 
 - Bootstrap 6 markup and design tokens throughout the admin.
 - "View site" is always available in the top bar, not buried in the user menu.
-- Sticky top bar with a collapsible sidebar (desktop) and drawer navigation
-  with a backdrop (mobile).
-- Dashboard with application cards in a vertical list at a comfortable width,
-  model shortcuts and recent actions in the adjacent right-hand column.
-- Subtle alternating row colours in dashboard category lists, the sidebar,
-  changelist, inline and history tables.
+- Sticky top bar and body-level breadcrumbs on every page. The left navigation
+  sidebar and hamburger drawer are intentionally removed.
+- Dashboard with a global application/model filter, collapsible category cards,
+  application cards in a vertical list and recent actions in the adjacent
+  right-hand column.
+- Category collapse state is remembered between pages.
+- Recent actions shows up to 10 entries and stretches to the dashboard height.
+- Subtle alternating row colours in dashboard category lists, changelist,
+  inline and history tables.
 - Changelist with search, date hierarchy, collapsible filters, sortable
   headers, bulk actions and Bootstrap pagination. The desktop filter panel can
   be collapsed, and both its state and the "Show counts" choice are remembered
@@ -45,8 +48,8 @@ permissions and JavaScript remain in charge.
   nothing.
 - Accessible focus states, labels, table headers and ARIA attributes.
 - All Django admin JavaScript hooks are preserved: `actions.js`,
-  `filters.js`, `nav_sidebar.js`, inlines, Select2/autocomplete, calendar
-  widgets and related-object lookups.
+  `filters.js`, inlines, Select2/autocomplete, calendar widgets and
+  related-object lookups.
 - CSP-aware: bundled scripts and styles use Django 6.1's
   `{% csp_nonce_attr %}` tag, so nonce-based policies work out of the box.
 - Generic by design: no models, no migrations, no project-specific imports and
@@ -101,7 +104,7 @@ python -m pip install -e .
 
 The app provides templates for the standard Django admin pages, including:
 
-- `admin/base.html`, `base_site.html`, `index.html`, `app_list.html`
+- `admin/base.html`, `base_site.html`, `index.html`, `app_index.html`
 - `admin/change_list.html`, `change_form.html`, `delete_confirmation.html`
 - `admin/edit_inline/stacked.html`, `edit_inline/tabular.html`
 - `admin/login.html`, `admin/object_history.html`
@@ -115,6 +118,10 @@ apply to those views if a project uses them outside the admin; override them
 if you need separate public-site auth screens. Password reset templates are
 intentionally left to the host project, because reset URLs and their branding
 usually belong to the public site rather than to the admin package.
+
+The theme intentionally omits Django's left navigation sidebar and its
+hamburger toggle. Use the body-level breadcrumbs, the dashboard search and the
+application cards for navigation.
 
 ## Customisation
 
@@ -166,7 +173,7 @@ custom admin CSS file:
     --ba-topbar-bg: #231f20;
     --ba-gold: #ffcb08;
     --ba-canvas: #f6f6f4;
-    --ba-sidebar-width: 300px;
+    --ba-icon-rail: 3.2rem;
 }
 ```
 
@@ -186,8 +193,10 @@ There is no runtime state to clean up.
 
 - The app only contributes templates and static files.
 - Django's admin views and forms are untouched.
-- Django's own JavaScript remains the source of truth for the sidebar state,
-  filters, bulk actions and inlines.
+- Django's own JavaScript remains the source of truth for filters, bulk
+  actions, inlines and form widgets.
+- The left navigation sidebar is not rendered; the top bar and body
+  breadcrumbs provide the navigation context.
 - The bundled `theme.js` reads and writes Django's `theme` localStorage key and
   mirrors it to `data-bs-theme`; it does not replace Django's admin behaviour.
 - Bootstrap 6 is pinned as `6.0.0-alpha.1` in

@@ -9,7 +9,7 @@
 
 :root {
     --ba-topbar-height: 64px;
-    --ba-sidebar-width: 272px;
+    --ba-icon-rail: 2.9rem;
     --ba-content-max: 1600px;
 
     --ba-topbar-bg: light-dark(#231f20, #242122);
@@ -393,25 +393,6 @@ samp {
     padding: 0.5rem 1.15rem;
 }
 
-.ba-sidebar-toggle {
-    --bs-btn-color: var(--ba-topbar-fg);
-    --bs-btn-bg: transparent;
-    --bs-btn-border-color: rgb(255 255 255 / 0.18);
-    --bs-btn-hover-bg: rgb(255 255 255 / 0.1);
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-border-color: rgb(255 255 255 / 0.34);
-    --bs-btn-active-bg: rgb(255 255 255 / 0.16);
-    --bs-btn-active-color: #fff;
-    flex: 0 0 auto;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: var(--ba-radius-sm);
-}
-
-.ba-no-sidebar .ba-sidebar-toggle {
-    display: none;
-}
-
 .ba-branding {
     display: flex;
     align-items: center;
@@ -651,7 +632,7 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
 }
 
 /* --------------------------------------------------------------------------
-   4. Application shell and sidebar
+   4. Application shell
    -------------------------------------------------------------------------- */
 
 #main {
@@ -664,207 +645,6 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
     margin-inline: auto;
 }
 
-#main.shifted::before {
-    position: absolute;
-    inset-block: 0;
-    inset-inline-start: var(--ba-sidebar-width);
-    width: 1px;
-    background: var(--ba-border);
-    content: "";
-    pointer-events: none;
-}
-
-.ba-sidebar {
-    position: sticky;
-    inset-block-start: var(--ba-topbar-height);
-    z-index: 1015;
-    flex: 0 0 var(--ba-sidebar-width);
-    width: var(--ba-sidebar-width);
-    max-height: calc(100vh - var(--ba-topbar-height));
-    margin-inline-start: calc(-1 * var(--ba-sidebar-width));
-    padding: 0.9rem 0.65rem 1.5rem;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    border-inline-end: 1px solid transparent;
-    background: var(--ba-canvas);
-    visibility: hidden;
-    transition:
-        margin-inline-start 0.18s ease,
-        visibility 0.18s ease;
-}
-
-#main.shifted > .ba-sidebar {
-    margin-inline-start: 0;
-    border-inline-end-color: transparent;
-    visibility: visible;
-}
-
-.ba-sr-toggle {
-    position: fixed;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.ba-sidebar-mobile-header {
-    display: none;
-}
-
-.ba-sidebar-mobile-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-
-.ba-sidebar-close {
-    width: 2rem;
-    height: 2rem;
-}
-
-.ba-sidebar-search {
-    position: relative;
-    margin-block-end: 0.75rem;
-}
-
-.ba-sidebar-search > .ba-icon {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 0.65rem;
-    width: 0.95rem;
-    height: 0.95rem;
-    color: var(--bs-fg-4);
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-#nav-filter {
-    width: 100%;
-    min-height: 2.2rem;
-    padding-inline-start: 2rem;
-    border-color: var(--ba-control-border);
-    background: var(--ba-surface);
-    font-size: 0.82rem;
-}
-
-#nav-filter.no-results {
-    border-color: var(--bs-danger-border);
-    background: var(--bs-danger-bg-subtle);
-}
-
-.ba-sidebar-scroll {
-    min-height: 0;
-}
-
-.ba-nav-app {
-    margin-block-end: 0.85rem;
-}
-
-.ba-nav-app-title {
-    display: block;
-    padding: 0.35rem 0.6rem;
-    color: var(--bs-fg-3);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.075em;
-    line-height: 1.3;
-    text-transform: uppercase;
-}
-
-.ba-nav-app-title:hover,
-.ba-nav-app-title:focus {
-    color: var(--bs-primary-fg);
-}
-
-.ba-nav-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.ba-nav-table th,
-.ba-nav-table td {
-    padding: 0;
-    border: 0;
-}
-
-.ba-nav-table tr:nth-child(even) > th,
-.ba-nav-table tr:nth-child(even) > td {
-    background: var(--ba-row-alt);
-}
-
-.ba-nav-table th {
-    width: 100%;
-    font-weight: 500;
-}
-
-.ba-nav-table th > a,
-.ba-nav-table th > span {
-    display: block;
-    padding: 0.38rem 0.6rem;
-    overflow: hidden;
-    border-radius: 0.4rem;
-    color: var(--bs-fg-2);
-    font-size: 0.855rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.ba-nav-table th > a:hover,
-.ba-nav-table th > a:focus,
-.ba-nav-app.current-app .ba-nav-app-title {
-    color: var(--bs-primary-fg-emphasis);
-}
-
-.ba-nav-table th > a:hover,
-.ba-nav-table th > a:focus {
-    background: var(--bs-bg-2);
-}
-
-.ba-nav-table .current-model th > a {
-    background: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary-fg-emphasis);
-    font-weight: 600;
-}
-
-.ba-nav-action {
-    width: 1%;
-    padding-inline-end: 0.35rem !important;
-    white-space: nowrap;
-}
-
-.ba-nav-link {
-    display: inline-grid;
-    place-items: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 0.35rem;
-    color: var(--bs-fg-4);
-    opacity: 0;
-    transition:
-        opacity 0.15s ease,
-        background-color 0.15s ease;
-}
-
-.ba-nav-link .ba-icon {
-    width: 0.85rem;
-    height: 0.85rem;
-}
-
-.ba-nav-table tr:hover .ba-nav-link,
-.ba-nav-table tr:focus-within .ba-nav-link {
-    opacity: 1;
-}
-
-.ba-nav-link:hover,
-.ba-nav-link:focus {
-    background: var(--bs-bg-3);
-    color: var(--bs-fg-1);
-    opacity: 1;
-}
-
 /* --------------------------------------------------------------------------
    5. Breadcrumbs, content and page header
    -------------------------------------------------------------------------- */
@@ -874,12 +654,6 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
     max-width: var(--ba-content-max);
     margin-inline: auto;
     padding: 0.7rem 1.3rem 0;
-}
-
-@media (min-width: 1024px) {
-    body:has(#main.shifted) .ba-breadcrumb-nav {
-        padding-inline-start: calc(var(--ba-sidebar-width) + 1.3rem);
-    }
 }
 
 .ba-breadcrumb-nav .breadcrumb {
@@ -1076,6 +850,55 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
    7. Dashboard
    -------------------------------------------------------------------------- */
 
+.ba-dashboard-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 46rem;
+    margin-block-end: 0.9rem;
+}
+
+.ba-dashboard-search-icon {
+    position: absolute;
+    inset-inline-start: 0.8rem;
+    width: 1rem;
+    height: 1rem;
+    color: var(--bs-fg-4);
+    pointer-events: none;
+}
+
+#ba-dashboard-search-input {
+    width: 100%;
+    min-height: 2.5rem;
+    padding-inline: 2.4rem 2.5rem;
+    border-color: var(--ba-control-border);
+    background: var(--ba-surface);
+    color: var(--bs-fg-body);
+}
+
+#ba-dashboard-search-input::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+.ba-dashboard-search-clear {
+    position: absolute;
+    inset-inline-end: 0.35rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+}
+
+.ba-dashboard-search-empty {
+    max-width: 46rem;
+    margin: -0.35rem 0 0.9rem;
+    padding: 0.6rem 0.75rem;
+    border: 1px dashed var(--ba-border);
+    border-radius: var(--ba-radius-sm);
+    background: var(--ba-surface-muted);
+    color: var(--ba-text-muted);
+    font-size: 0.82rem;
+}
+
 .ba-dashboard {
     display: grid;
     grid-template-columns: minmax(0, 46rem) minmax(0, 1fr);
@@ -1141,26 +964,70 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-app-card-header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto auto;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.75rem 0.85rem;
+    padding: 0.55rem 0.6rem 0.55rem 0;
     border-block-end: 1px solid var(--ba-border);
     background: var(--ba-surface-muted);
 }
 
-.ba-app-icon {
+.ba-icon-rail {
+    display: grid;
+    align-self: stretch;
+    place-items: center;
+    width: var(--ba-icon-rail);
+    min-height: 2.4rem;
+    border-inline-end: 1px solid var(--ba-border);
+}
+
+.ba-app-icon,
+.ba-model-icon {
     display: grid;
     flex: 0 0 auto;
     place-items: center;
     width: 1.9rem;
     height: 1.9rem;
-    border-radius: 0.45rem;
+    border: 1px solid var(--bs-primary-border);
+    border-radius: var(--ba-radius-sm);
     background: var(--bs-primary-bg-subtle);
     color: var(--bs-primary-fg-emphasis);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 800;
+}
+
+.ba-app-icon {
+    font-size: 0.82rem;
+}
+
+.ba-app-collapse {
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+}
+
+.ba-app-chevron {
+    width: 0.85rem;
+    height: 0.85rem;
+    transition: transform 0.15s ease;
+}
+
+.ba-app-card.is-collapsed .ba-app-chevron {
+    transform: rotate(-90deg);
+}
+
+.ba-app-card.is-collapsed .ba-app-body {
+    display: none;
+}
+
+.ba-app-card.ba-search-match .ba-app-body {
+    display: block;
+}
+
+.ba-app-card[hidden],
+.ba-model-list > li[hidden] {
+    display: none !important;
 }
 
 .ba-app-name {
@@ -1185,7 +1052,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-app-card .card-body {
-    padding: 0.35rem 0.5rem;
+    padding: 0;
 }
 
 .ba-model-list {
@@ -1197,10 +1064,11 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-model-list > li {
-    display: flex;
+    display: grid;
+    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.2rem 0.15rem;
+    gap: 0.55rem;
+    padding: 0 0.6rem 0 0;
     border-block-end: 1px solid var(--ba-border-muted);
 }
 
@@ -1220,9 +1088,8 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
     display: flex;
     flex: 1 1 auto;
     align-items: center;
-    gap: 0.55rem;
     min-width: 0;
-    padding: 0.28rem 0.25rem;
+    padding: 0.38rem 0.35rem;
     border-radius: 0.35rem;
     color: var(--bs-fg-2);
     font-size: 0.86rem;
@@ -1241,16 +1108,9 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-model-icon {
-    display: grid;
-    flex: 0 0 auto;
-    place-items: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 0.35rem;
-    background: var(--bs-bg-2);
-    color: var(--bs-fg-3);
-    font-size: 0.66rem;
-    font-weight: 800;
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.72rem;
 }
 
 .ba-model-name {
@@ -1262,9 +1122,8 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 .ba-model-actions {
     display: flex;
     flex: 0 0 auto;
-    gap: 0.2rem;
-    opacity: 0.45;
-    transition: opacity 0.15s ease;
+    gap: 0.25rem;
+    opacity: 1;
 }
 
 .ba-model-list > li:hover .ba-model-actions,
@@ -1273,9 +1132,19 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-model-actions .btn {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.9rem;
+    height: 1.9rem;
     padding: 0;
+    border-color: var(--ba-control-border);
+    background: var(--ba-surface);
+    color: var(--bs-fg-2);
+}
+
+.ba-model-actions .btn:hover,
+.ba-model-actions .btn:focus {
+    border-color: var(--bs-primary-border);
+    background: var(--bs-primary-bg-subtle);
+    color: var(--bs-primary-fg-emphasis);
 }
 
 .ba-model-actions .ba-icon {
@@ -1286,12 +1155,17 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 .ba-dashboard-aside {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     gap: 0.9rem;
     width: min(100%, 22rem);
     min-width: 0;
 }
 
 .ba-recent-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
     border-color: var(--ba-border);
     border-radius: var(--ba-radius);
     background: var(--ba-surface);
@@ -1305,7 +1179,11 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-recent-card .card-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: calc(100vh - var(--ba-topbar-height) - 8rem);
     padding: 0.75rem 0.9rem;
+    overflow-y: auto;
 }
 
 .ba-card-title {
@@ -3601,62 +3479,6 @@ body.popup .ba-submit-row {
         display: block;
     }
 
-    #main.shifted::before {
-        display: none;
-    }
-
-    .ba-sidebar {
-        position: fixed;
-        inset-block-start: var(--ba-topbar-height);
-        inset-block-end: 0;
-        inset-inline-start: 0;
-        z-index: 1045;
-        width: min(86vw, 20rem);
-        max-height: none;
-        margin: 0;
-        padding-block-end: 2rem;
-        border-inline-end: 1px solid var(--ba-border);
-        background: var(--ba-surface);
-        box-shadow: 0.75rem 0 2rem rgb(0 0 0 / 0.18);
-        visibility: visible;
-        transform: translateX(-105%);
-        transition: transform 0.2s ease;
-    }
-
-    [dir="rtl"] .ba-sidebar {
-        box-shadow: -0.75rem 0 2rem rgb(0 0 0 / 0.18);
-        transform: translateX(105%);
-    }
-
-    #main.shifted > .ba-sidebar {
-        transform: translateX(0);
-    }
-
-    .ba-sidebar-mobile-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        margin-block-end: 0.65rem;
-        padding: 0 0.3rem;
-    }
-
-    .ba-sidebar-backdrop {
-        position: fixed;
-        inset: var(--ba-topbar-height) 0 0;
-        z-index: 1040;
-        background: rgb(7 15 25 / 0.5);
-        backdrop-filter: blur(2px);
-    }
-
-    .ba-sidebar-backdrop[hidden] {
-        display: none;
-    }
-
-    body.ba-sidebar-open {
-        overflow: hidden;
-    }
-
     .content {
         padding-inline: 0.9rem;
     }
@@ -3880,18 +3702,10 @@ body.popup .ba-submit-row {
     }
 }
 
-@media (hover: none) {
-    .ba-model-actions,
-    .ba-nav-link {
-        opacity: 1;
-    }
-}
-
 /* Small secondary copy needs a stronger contrast than --bs-fg-4 provides. */
 .ba-page-subtitle,
 .ba-footer,
 .ba-action-label,
-.ba-nav-app-title,
 .ba-filter-list a,
 .ba-actions-selection,
 .ba-pagination-summary,
@@ -3910,8 +3724,6 @@ small.quiet {
 @media print {
     .ba-topbar,
     .ba-breadcrumb-nav,
-    .ba-sidebar,
-    .ba-sidebar-backdrop,
     .ba-footer,
     .ba-filters,
     .ba-object-tools,

@@ -3,139 +3,161 @@
 /*
  * Small progressive enhancement layer for the Bootstrap 6 admin.
  *
- * Django's own admin JavaScript remains the source of truth for the
- * sidebar state (`#main.shifted` and `#nav-sidebar[aria-expanded]`).
- * This file only mirrors that state to the topbar button, adds a mobile
- * backdrop, and closes the sidebar with Escape or an outside click.
+ * Django's own admin JavaScript remains the source of truth for filters,
+ * bulk actions and form widgets. This file adds dashboard search/collapse,
+ * the right-hand filter disclosure and a few accessibility fixes.
  */
 (() => {
-    const MOBILE = window.matchMedia("(max-width: 1023.98px)");
     const DESKTOP = window.matchMedia("(min-width: 1200px)");
-    const STORAGE_KEY = "django.admin.navSidebarIsOpen";
     const FILTERS_KEY = "django.admin.filtersCollapsed";
     const FACETS_KEY = "django.admin.showFacets";
+    const COLLAPSED_APPS_KEY = "django.admin.collapsedApps";
 
-    function initSidebar() {
-        const main = document.getElementById("main");
-        const sidebar = document.getElementById("nav-sidebar");
-        const nativeToggle = document.getElementById("toggle-nav-sidebar");
-        const topbarToggle = document.getElementById("ba-sidebar-toggle");
-        const closeButton = document.getElementById("ba-sidebar-close");
-        const backdrop = document.getElementById("ba-sidebar-backdrop");
-
-        if (!topbarToggle) {
-            return;
-        }
-
-        // Pages such as the dashboard and the login screen deliberately
-        // render without the navigation sidebar.
-        if (!main || !sidebar || !nativeToggle) {
-            topbarToggle.hidden = true;
-            return;
-        }
-
-        function isOpen() {
-            return main.classList.contains("shifted");
-        }
-
-        function sync() {
-            const open = isOpen();
-            topbarToggle.setAttribute("aria-expanded", open ? "true" : "false");
-            sidebar.toggleAttribute("inert", !open);
-            sidebar.setAttribute("aria-hidden", open ? "false" : "true");
-            document.body.classList.toggle(
-                "ba-sidebar-open",
-                open && MOBILE.matches,
+    function readCollapsedApps() {
+        try {
+            const value = JSON.parse(
+                localStorage.getItem(COLLAPSED_APPS_KEY) || "[]",
             );
-            if (backdrop) {
-                backdrop.hidden = !(open && MOBILE.matches);
-            }
+            return new Set(Array.isArray(value) ? value : []);
+        } catch (error) {
+            return new Set();
+        }
+    }
+
+    function writeCollapsedApps(labels) {
+        try {
+            localStorage.setItem(
+                COLLAPSED_APPS_KEY,
+                JSON.stringify(Array.from(labels)),
+            );
+        } catch (error) {
+            // Storage can be unavailable in private or restricted contexts.
+        }
+    }
+
+    function initAppCollapse() {
+        const cards = document.querySelectorAll(".ba-app-card[data-app-label]");
+        if (!cards.length) {
+            return;
         }
 
-        function focusSidebar() {
-            if (!MOBILE.matches) {
+        const collapsed = readCollapsedApps();
+
+        cards.forEach((card) => {
+            const label = card.dataset.appLabel;
+            const button = card.querySelector(".ba-app-collapse");
+            if (!button || !label) {
                 return;
             }
-            const target =
-                closeButton ||
-                sidebar.querySelector("#nav-filter, a, button");
-            if (target) {
-                window.requestAnimationFrame(() => target.focus());
-            }
-        }
 
-        function closeSidebar(returnFocus) {
-            if (isOpen()) {
-                nativeToggle.click();
-            }
-            if (returnFocus) {
-                topbarToggle.focus();
-            }
-        }
+            const setCollapsed = (isCollapsed, persist) => {
+                card.classList.toggle("is-collapsed", isCollapsed);
+                button.setAttribute(
+                    "aria-expanded",
+                    isCollapsed ? "false" : "true",
+                );
+                if (!persist) {
+                    return;
+                }
+                if (isCollapsed) {
+                    collapsed.add(label);
+                } else {
+                    collapsed.delete(label);
+                }
+                writeCollapsedApps(collapsed);
+            };
 
-        topbarToggle.addEventListener("click", () => {
-            const opening = !isOpen();
-            nativeToggle.click();
-            if (opening) {
-                focusSidebar();
-            }
-        });
-
-        if (closeButton) {
-            closeButton.addEventListener("click", () => {
-                closeSidebar(true);
+            setCollapsed(collapsed.has(label), false);
+            button.addEventListener("click", () => {
+                setCollapsed(
+                    !card.classList.contains("is-collapsed"),
+                    true,
+                );
             });
+        });
+    }
+
+    function initDashboardSearch() {
+        const form = document.getElementById("ba-dashboard-search");
+        const input = document.getElementById("ba-dashboard-search-input");
+        const clear = document.getElementById("ba-dashboard-search-clear");
+        const empty = document.getElementById("ba-dashboard-search-empty");
+        const cards = Array.from(
+            document.querySelectorAll(".ba-app-card[data-app-label]"),
+        );
+        if (!form || !input || !cards.length) {
+            return;
         }
 
-        if (backdrop) {
-            backdrop.addEventListener("click", () => {
-                closeSidebar(true);
-            });
-        }
+        const normalize = (value) =>
+            (value || "").trim().toLocaleLowerCase("tr");
 
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && MOBILE.matches && isOpen()) {
-                closeSidebar(true);
-            }
-        });
+        const apply = () => {
+            const query = normalize(input.value);
+            let visibleCards = 0;
 
-        // Close the mobile drawer after choosing a destination. Keeping it
-        // open through navigation makes every link cost an extra close tap.
-        sidebar.addEventListener("click", (event) => {
-            if (!MOBILE.matches || !isOpen()) {
-                return;
-            }
-            const link = event.target.closest("a");
-            if (link && sidebar.contains(link)) {
-                nativeToggle.click();
-            }
-        });
+            cards.forEach((card) => {
+                const appName = normalize(card.dataset.appName);
+                const appMatches = Boolean(query) && appName.includes(query);
+                let visibleModels = 0;
 
-        const observer = new MutationObserver(sync);
-        observer.observe(main, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
-        observer.observe(sidebar, {
-            attributes: true,
-            attributeFilter: ["aria-expanded"],
-        });
+                card.querySelectorAll(".ba-model-list > li").forEach((row) => {
+                    const modelName = normalize(row.dataset.modelName);
+                    const matches =
+                        !query || appMatches || modelName.includes(query);
+                    row.hidden = !matches;
+                    if (matches) {
+                        visibleModels += 1;
+                    }
+                });
 
-        if (MOBILE.addEventListener) {
-            MOBILE.addEventListener("change", sync);
-        }
-
-        // On the first mobile visit, open the page with the navigation
-        // closed. A stored preference always wins.
-        if (MOBILE.matches && localStorage.getItem(STORAGE_KEY) === null) {
-            window.requestAnimationFrame(() => {
-                if (isOpen()) {
-                    nativeToggle.click();
+                const show = !query || appMatches || visibleModels > 0;
+                card.hidden = !show;
+                card.classList.toggle("ba-search-match", Boolean(query) && show);
+                const button = card.querySelector(".ba-app-collapse");
+                if (button) {
+                    button.setAttribute(
+                        "aria-expanded",
+                        query && show
+                            ? "true"
+                            : card.classList.contains("is-collapsed")
+                              ? "false"
+                              : "true",
+                    );
+                }
+                if (show) {
+                    visibleCards += 1;
                 }
             });
+
+            if (clear) {
+                clear.hidden = !query;
+            }
+            if (empty) {
+                empty.hidden = visibleCards > 0;
+            }
+        };
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+        });
+        input.addEventListener("input", apply);
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && input.value) {
+                input.value = "";
+                apply();
+                event.preventDefault();
+            }
+        });
+        if (clear) {
+            clear.addEventListener("click", () => {
+                input.value = "";
+                apply();
+                input.focus();
+            });
         }
 
-        sync();
+        apply();
     }
 
     function initAccessibility() {
@@ -416,7 +438,8 @@
     }
 
     function initAll() {
-        initSidebar();
+        initAppCollapse();
+        initDashboardSearch();
         initFilterDisclosure();
         initFacetPreference();
         initDirtyGuard();

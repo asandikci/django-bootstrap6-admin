@@ -69,3 +69,6 @@ class PackageAssetsTests(SimpleTestCase):
         self.assertIn("caption-side: top", admin_css)
         self.assertIn("--ba-row-alt", admin_css)
         self.assertIn("grid-template-columns: minmax(0, 46rem)", admin_css)
+        self.assertIn("--ba-icon-rail", admin_css)
+        self.assertIn("django.admin.collapsedApps", admin_js)
+        self.assertIn("ba-dashboard-search", admin_js)
