@@ -19,10 +19,10 @@ permissions and JavaScript remain in charge.
 - "View site" is always available in the top bar, not buried in the user menu.
 - Sticky top bar and body-level breadcrumbs on every page. The left navigation
   sidebar and hamburger drawer are intentionally removed.
-- Dashboard with a global application/model filter, collapsible category cards,
-  application cards in a vertical list and recent actions in the adjacent
-  right-hand column.
-- Category collapse state is remembered between pages.
+- Dashboard with a global application/model filter, application cards in a
+  vertical list and recent actions in the adjacent right-hand column.
+- Category model rows are slightly indented under their app header, with the
+  letter plates on a dedicated icon rail.
 - Recent actions shows up to 10 entries and stretches to the dashboard height.
 - Subtle alternating row colours in dashboard category lists, changelist,
   inline and history tables.

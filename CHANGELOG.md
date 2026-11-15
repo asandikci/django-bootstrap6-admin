@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-15
+
+### Changed
+
+- Dashboard model rows are indented below their category header, so the letter
+  plates start slightly further to the right.
+
+### Removed
+
+- Category collapse buttons, chevrons and their localStorage persistence.
+  Categories are always expanded.
+
 ## [0.3.0] - 2026-11-15
 
 ### Added

@@ -4,78 +4,13 @@
  * Small progressive enhancement layer for the Bootstrap 6 admin.
  *
  * Django's own admin JavaScript remains the source of truth for filters,
- * bulk actions and form widgets. This file adds dashboard search/collapse,
- * the right-hand filter disclosure and a few accessibility fixes.
+ * bulk actions and form widgets. This file adds dashboard search, the
+ * right-hand filter disclosure and a few accessibility fixes.
  */
 (() => {
     const DESKTOP = window.matchMedia("(min-width: 1200px)");
     const FILTERS_KEY = "django.admin.filtersCollapsed";
     const FACETS_KEY = "django.admin.showFacets";
-    const COLLAPSED_APPS_KEY = "django.admin.collapsedApps";
-
-    function readCollapsedApps() {
-        try {
-            const value = JSON.parse(
-                localStorage.getItem(COLLAPSED_APPS_KEY) || "[]",
-            );
-            return new Set(Array.isArray(value) ? value : []);
-        } catch (error) {
-            return new Set();
-        }
-    }
-
-    function writeCollapsedApps(labels) {
-        try {
-            localStorage.setItem(
-                COLLAPSED_APPS_KEY,
-                JSON.stringify(Array.from(labels)),
-            );
-        } catch (error) {
-            // Storage can be unavailable in private or restricted contexts.
-        }
-    }
-
-    function initAppCollapse() {
-        const cards = document.querySelectorAll(".ba-app-card[data-app-label]");
-        if (!cards.length) {
-            return;
-        }
-
-        const collapsed = readCollapsedApps();
-
-        cards.forEach((card) => {
-            const label = card.dataset.appLabel;
-            const button = card.querySelector(".ba-app-collapse");
-            if (!button || !label) {
-                return;
-            }
-
-            const setCollapsed = (isCollapsed, persist) => {
-                card.classList.toggle("is-collapsed", isCollapsed);
-                button.setAttribute(
-                    "aria-expanded",
-                    isCollapsed ? "false" : "true",
-                );
-                if (!persist) {
-                    return;
-                }
-                if (isCollapsed) {
-                    collapsed.add(label);
-                } else {
-                    collapsed.delete(label);
-                }
-                writeCollapsedApps(collapsed);
-            };
-
-            setCollapsed(collapsed.has(label), false);
-            button.addEventListener("click", () => {
-                setCollapsed(
-                    !card.classList.contains("is-collapsed"),
-                    true,
-                );
-            });
-        });
-    }
 
     function initDashboardSearch() {
         const form = document.getElementById("ba-dashboard-search");
@@ -113,18 +48,6 @@
 
                 const show = !query || appMatches || visibleModels > 0;
                 card.hidden = !show;
-                card.classList.toggle("ba-search-match", Boolean(query) && show);
-                const button = card.querySelector(".ba-app-collapse");
-                if (button) {
-                    button.setAttribute(
-                        "aria-expanded",
-                        query && show
-                            ? "true"
-                            : card.classList.contains("is-collapsed")
-                              ? "false"
-                              : "true",
-                    );
-                }
                 if (show) {
                     visibleCards += 1;
                 }
@@ -438,7 +361,6 @@
     }
 
     function initAll() {
-        initAppCollapse();
         initDashboardSearch();
         initFilterDisclosure();
         initFacetPreference();

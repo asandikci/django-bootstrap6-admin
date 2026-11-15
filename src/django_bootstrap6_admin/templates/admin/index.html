@@ -55,12 +55,6 @@
                   </span>
                   <a class="ba-app-name" href="{{ app.app_url }}" title="{{ app.name }}">{{ app.name }}</a>
                   <span class="badge badge-subtle theme-secondary ba-app-count">{{ app.models|length }}</span>
-                  <button type="button" class="btn btn-icon btn-outline theme-secondary ba-app-collapse"
-                          aria-expanded="true" aria-controls="ba-app-body-{{ app.app_label }}"
-                          aria-label="{% blocktranslate with name=app.name %}Toggle {{ name }} models{% endblocktranslate %}"
-                          title="{% blocktranslate with name=app.name %}Toggle {{ name }} models{% endblocktranslate %}">
-                    <svg class="ba-icon ba-app-chevron" aria-hidden="true"><use href="#ba-chevron-down"></use></svg>
-                  </button>
                 </div>
                 <div class="card-body ba-app-body" id="ba-app-body-{{ app.app_label }}">
                   <ul class="ba-model-list">

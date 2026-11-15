@@ -965,7 +965,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-app-card-header {
     display: grid;
-    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto auto;
+    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.55rem;
     padding: 0.55rem 0.6rem 0.55rem 0;
@@ -999,30 +999,6 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-app-icon {
     font-size: 0.82rem;
-}
-
-.ba-app-collapse {
-    width: 1.9rem;
-    height: 1.9rem;
-    padding: 0;
-}
-
-.ba-app-chevron {
-    width: 0.85rem;
-    height: 0.85rem;
-    transition: transform 0.15s ease;
-}
-
-.ba-app-card.is-collapsed .ba-app-chevron {
-    transform: rotate(-90deg);
-}
-
-.ba-app-card.is-collapsed .ba-app-body {
-    display: none;
-}
-
-.ba-app-card.ba-search-match .ba-app-body {
-    display: block;
 }
 
 .ba-app-card[hidden],
@@ -1068,7 +1044,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
     grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.55rem;
-    padding: 0 0.6rem 0 0;
+    padding: 0 0.6rem 0 0.7rem;
     border-block-end: 1px solid var(--ba-border-muted);
 }
 
