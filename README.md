@@ -29,6 +29,8 @@ permissions and JavaScript remain in charge.
   object history.
 - Change form with card-based fieldsets, collapsible sections, a clear save
   bar, tabular/stacked inlines and related-object popups.
+- Theme-aware date and time fields with compact Today/Now actions, calendar
+  and clock dialogs, and proper dark-mode contrast.
 - Modern login, logout and password change pages.
 - Light, dark and system themes. The existing Django `theme` localStorage
   preference is synchronised with Bootstrap's `data-bs-theme` attribute.

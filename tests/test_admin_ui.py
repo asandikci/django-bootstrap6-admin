@@ -168,6 +168,11 @@ class AdminUiTests(TestCase):
             "ba-submit-row",
             "deletelink",
             "historylink",
+            "vDateField",
+            "vTimeField",
+            'class="datetime"',
+            'id="id_published_at_0"',
+            'id="id_reminder_time"',
         ):
             self.assertContains(response, marker)
 

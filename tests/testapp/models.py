@@ -45,6 +45,8 @@ class Book(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True)
     published = models.DateField(null=True, blank=True)
+    published_at = models.DateTimeField(null=True, blank=True)
+    reminder_time = models.TimeField(null=True, blank=True)
     pages = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     summary = models.TextField(blank=True)

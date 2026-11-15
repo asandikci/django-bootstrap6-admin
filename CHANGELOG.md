@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-11-15
+
+### Changed
+
+- Redesigned date and time fields with compact Today/Now links, theme-aware
+  calendar and clock icon buttons, and a tidy two-row split datetime layout.
+- Calendar and clock dialogs now use the active theme's surface, text and
+  border tokens. The month caption is shown at the top and quick links are
+  styled as compact buttons.
+
+### Fixed
+
+- The dark-mode calendar no longer renders a hard-coded white table or
+  low-contrast day labels.
+
 ## [0.2.2] - 2026-11-15
 
 ### Changed

@@ -42,7 +42,19 @@ class BookAdmin(admin.ModelAdmin):
     actions = ("mark_inactive",)
     fieldsets = (
         (None, {"fields": ("title", "author", "tags")}),
-        ("Publication", {"fields": ("publisher", "published", "pages", "is_active")}),
+        (
+            "Publication",
+            {
+                "fields": (
+                    "publisher",
+                    "published",
+                    "published_at",
+                    "reminder_time",
+                    "pages",
+                    "is_active",
+                )
+            },
+        ),
         ("Extra", {"classes": ("collapse",), "fields": ("summary",)}),
     )
 

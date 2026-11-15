@@ -64,3 +64,6 @@ class PackageAssetsTests(SimpleTestCase):
         self.assertIn("--bs-fg-4: #b0aaa9", admin_css)
         self.assertIn("--ba-topbar-bg: light-dark(#231f20, #242122)", admin_css)
         self.assertIn("--bs-primary-bg: light-dark(#ffcb08, #d8ab32)", admin_css)
+        self.assertIn("--ba-icon-calendar", admin_css)
+        self.assertIn("--ba-icon-clock", admin_css)
+        self.assertIn("caption-side: top", admin_css)
