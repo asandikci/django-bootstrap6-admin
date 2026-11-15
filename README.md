@@ -21,8 +21,6 @@ permissions and JavaScript remain in charge.
   sidebar and hamburger drawer are intentionally removed.
 - Dashboard with a global application/model filter, application cards in a
   vertical list and recent actions in the adjacent right-hand column.
-- Category model rows are slightly indented under their app header, with the
-  letter plates on a dedicated icon rail.
 - Recent actions shows up to 10 entries and stretches to the dashboard height.
 - Subtle alternating row colours in dashboard category lists, changelist,
   inline and history tables.

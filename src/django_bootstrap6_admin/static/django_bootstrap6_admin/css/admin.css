@@ -9,7 +9,6 @@
 
 :root {
     --ba-topbar-height: 64px;
-    --ba-icon-rail: 2.9rem;
     --ba-content-max: 1600px;
 
     --ba-topbar-bg: light-dark(#231f20, #242122);
@@ -965,40 +964,12 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-app-card-header {
     display: grid;
-    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.55rem 0.6rem 0.55rem 0;
+    padding: 0.55rem 0.85rem;
     border-block-end: 1px solid var(--ba-border);
     background: var(--ba-surface-muted);
-}
-
-.ba-icon-rail {
-    display: grid;
-    align-self: stretch;
-    place-items: center;
-    width: var(--ba-icon-rail);
-    min-height: 2.4rem;
-    border-inline-end: 1px solid var(--ba-border);
-}
-
-.ba-app-icon,
-.ba-model-icon {
-    display: grid;
-    flex: 0 0 auto;
-    place-items: center;
-    width: 1.9rem;
-    height: 1.9rem;
-    border: 1px solid var(--bs-primary-border);
-    border-radius: var(--ba-radius-sm);
-    background: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary-fg-emphasis);
-    font-size: 0.78rem;
-    font-weight: 800;
-}
-
-.ba-app-icon {
-    font-size: 0.82rem;
 }
 
 .ba-app-card[hidden],
@@ -1041,10 +1012,10 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-model-list > li {
     display: grid;
-    grid-template-columns: var(--ba-icon-rail) minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.55rem;
-    padding: 0 0.6rem 0 0.7rem;
+    padding: 0 0.6rem 0 0.5rem;
     border-block-end: 1px solid var(--ba-border-muted);
 }
 
@@ -1081,12 +1052,6 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 .ba-model-disabled {
     color: var(--bs-fg-4);
     cursor: default;
-}
-
-.ba-model-icon {
-    width: 1.9rem;
-    height: 1.9rem;
-    font-size: 0.72rem;
 }
 
 .ba-model-name {

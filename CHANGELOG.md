@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-11-15
+
+### Changed
+
+- Removed the model-row indentation; model names now align with their category
+  header.
+
+### Removed
+
+- Yellow letter plates and the icon rail/vertical rule from the dashboard
+  categories.
+
 ## [0.3.1] - 2026-11-15
 
 ### Changed

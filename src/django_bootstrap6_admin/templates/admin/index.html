@@ -50,9 +50,6 @@
             {% for app in app_list %}
               <section class="card ba-app-card" data-app-label="{{ app.app_label }}" data-app-name="{{ app.name }}">
                 <div class="card-header ba-app-card-header">
-                  <span class="ba-icon-rail">
-                    <span class="ba-app-icon" aria-hidden="true">{{ app.name|first|upper }}</span>
-                  </span>
                   <a class="ba-app-name" href="{{ app.app_url }}" title="{{ app.name }}">{{ app.name }}</a>
                   <span class="badge badge-subtle theme-secondary ba-app-count">{{ app.models|length }}</span>
                 </div>
@@ -60,9 +57,6 @@
                   <ul class="ba-model-list">
                     {% for model in app.models %}
                       <li data-model-name="{{ model.name }}">
-                        <span class="ba-icon-rail">
-                          <span class="ba-model-icon" aria-hidden="true">{{ model.name|first|upper }}</span>
-                        </span>
                         {% if model.admin_url %}
                           <a class="ba-model-link" href="{{ model.admin_url }}">
                             <span class="ba-model-name" title="{{ model.name }}">{{ model.name }}</span>
