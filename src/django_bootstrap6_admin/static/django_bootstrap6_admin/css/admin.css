@@ -1072,8 +1072,8 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-dashboard {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 21rem;
-    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
     align-items: start;
 }
 
@@ -1107,13 +1107,16 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-app-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.9rem;
+    width: 100%;
 }
 
 .ba-app-card {
-    height: 100%;
+    width: min(100%, 18rem);
+    height: auto;
     overflow: hidden;
     border-color: var(--ba-border);
     border-radius: var(--ba-radius);
@@ -1270,6 +1273,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+    width: min(100%, 18rem);
     min-width: 0;
 }
 
@@ -3533,10 +3537,6 @@ body.popup .ba-submit-row {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .ba-app-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .ba-changelist-layout {
         display: flex;
         flex-direction: column;
@@ -3726,8 +3726,9 @@ body.popup .ba-submit-row {
         padding: 0.75rem;
     }
 
-    .ba-app-grid {
-        grid-template-columns: minmax(0, 1fr);
+    .ba-app-card,
+    .ba-dashboard-aside {
+        width: 100%;
     }
 
     .ba-field .datetime {
@@ -3827,10 +3828,6 @@ body.popup .ba-submit-row {
         clip: rect(0, 0, 0, 0);
         clip-path: inset(50%);
         white-space: nowrap;
-    }
-
-    .ba-app-grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .ba-search-field {
