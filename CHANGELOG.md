@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-11-15
+
+### Changed
+
+- Dashboard application cards use a three-column grid again, dropping to two
+  columns on tablets and one on phones. Recent actions return to the right-hand
+  sidebar; the single-column layout from 0.2.2 was not wanted.
+
 ## [0.2.3] - 2026-11-15
 
 ### Changed

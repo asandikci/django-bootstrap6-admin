@@ -27,7 +27,7 @@
             <section class="card ba-app-card">
               <div class="card-header ba-app-card-header">
                 <span class="ba-app-icon" aria-hidden="true">{{ app.name|first|upper }}</span>
-                <a class="ba-app-name" href="{{ app.app_url }}">{{ app.name }}</a>
+                <a class="ba-app-name" href="{{ app.app_url }}" title="{{ app.name }}">{{ app.name }}</a>
                 <span class="badge badge-subtle theme-secondary ba-app-count">{{ app.models|length }}</span>
               </div>
               <div class="card-body">
@@ -37,12 +37,12 @@
                       {% if model.admin_url %}
                         <a class="ba-model-link" href="{{ model.admin_url }}">
                           <span class="ba-model-icon" aria-hidden="true">{{ model.name|first|upper }}</span>
-                          <span class="ba-model-name">{{ model.name }}</span>
+                          <span class="ba-model-name" title="{{ model.name }}">{{ model.name }}</span>
                         </a>
                       {% else %}
                         <span class="ba-model-link ba-model-disabled">
                           <span class="ba-model-icon" aria-hidden="true">{{ model.name|first|upper }}</span>
-                          <span class="ba-model-name">{{ model.name }}</span>
+                          <span class="ba-model-name" title="{{ model.name }}">{{ model.name }}</span>
                         </span>
                       {% endif %}
                       <span class="ba-model-actions">
