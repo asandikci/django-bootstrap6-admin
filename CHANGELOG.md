@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-11-15
+
+### Changed
+
+- Recent actions moved from below the dashboard categories into the column
+  immediately to their right. The vertical category list itself is unchanged.
+
 ## [0.2.5] - 2026-11-15
 
 ### Changed
