@@ -19,7 +19,8 @@ permissions and JavaScript remain in charge.
 - "View site" is always available in the top bar, not buried in the user menu.
 - Sticky top bar with a collapsible sidebar (desktop) and drawer navigation
   with a backdrop (mobile).
-- Dashboard with application cards, model shortcuts and recent activity.
+- Dashboard with application cards stacked in a single column, model
+  shortcuts and recent actions below the applications.
 - Changelist with search, date hierarchy, collapsible filters, sortable
   headers, bulk actions and Bootstrap pagination. The desktop filter panel can
   be collapsed, and both its state and the "Show counts" choice are remembered

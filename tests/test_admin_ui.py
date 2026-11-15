@@ -50,6 +50,10 @@ class AdminUiTests(TestCase):
         self.assertContains(response, "ba-recent-card")
         self.assertContains(response, "theme-toggle")
         self.assertContains(response, "ba-view-site")
+        self.assertEqual(
+            response.content.decode().count('class="btn btn-outline ba-view-site"'),
+            1,
+        )
 
     def test_default_django_admin_css_is_not_loaded(self):
         response = self.client.get(reverse("admin:index"))
@@ -224,6 +228,10 @@ class AdminUiTests(TestCase):
         self.assertContains(response, "theme-toggle")
         self.assertContains(response, "ba-login")
         self.assertContains(response, "ba-view-site")
+        self.assertEqual(
+            response.content.decode().count('class="btn btn-outline ba-view-site"'),
+            1,
+        )
 
     def test_login_post_works(self):
         self.client.logout()

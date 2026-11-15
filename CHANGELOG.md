@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-15
+
+### Changed
+
+- Dashboard application categories are now stacked vertically in a single
+  column, like Django's original dashboard, instead of forming a left/right
+  grid. Recent actions sit below the categories and share their left edge.
+
+### Removed
+
+- The duplicate "View site" button on the dashboard heading. The top-bar link
+  remains available on every admin page.
+
 ## [0.2.1] - 2026-11-15
 
 ### Added

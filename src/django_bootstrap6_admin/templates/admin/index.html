@@ -17,12 +17,6 @@
             <p class="ba-eyebrow">{% translate 'Administration' %}</p>
             <h1 class="ba-page-title">{{ index_title|default:_('Site administration') }}</h1>
           </div>
-          {% if site_url %}
-            <a class="btn btn-outline theme-secondary btn-sm" href="{{ site_url }}">
-              <svg class="ba-icon" aria-hidden="true"><use href="#ba-external"></use></svg>
-              {% translate 'View site' %}
-            </a>
-          {% endif %}
         </div>
       {% endblock %}
 

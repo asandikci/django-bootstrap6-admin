@@ -71,8 +71,8 @@ environment and compiles every bundled template as a smoke test.
 5. Create and push an annotated tag:
 
    ```bash
-   git tag -a v0.2.1 -m "django-bootstrap6-admin 0.2.1"
-   git push origin v0.2.1
+   git tag -a v0.2.2 -m "django-bootstrap6-admin 0.2.2"
+   git push origin v0.2.2
    ```
 
 6. The `Release` workflow builds the distributions, verifies that the tag
