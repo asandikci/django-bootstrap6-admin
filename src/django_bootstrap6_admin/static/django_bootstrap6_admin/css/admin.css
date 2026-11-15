@@ -1072,7 +1072,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-dashboard {
     display: grid;
-    grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
     gap: 1rem;
     align-items: start;
 }
@@ -1115,7 +1115,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-app-card {
-    width: min(100%, 18rem);
+    width: min(100%, 20rem);
     height: auto;
     overflow: hidden;
     border-color: var(--ba-border);

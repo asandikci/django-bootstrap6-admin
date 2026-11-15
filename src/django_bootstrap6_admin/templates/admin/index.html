@@ -11,14 +11,7 @@
 {% block content %}
   <div id="content-main" class="app-list ba-dashboard">
     <div class="ba-dashboard-main">
-      {% block dashboard-heading %}
-        <div class="ba-section-heading">
-          <div>
-            <p class="ba-eyebrow">{% translate 'Administration' %}</p>
-            <h1 class="ba-page-title">{{ index_title|default:_('Site administration') }}</h1>
-          </div>
-        </div>
-      {% endblock %}
+      {% block dashboard-heading %}{% endblock %}
 
       {% block app-list %}
       {% if app_list %}

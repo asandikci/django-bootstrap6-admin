@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-11-15
+
+### Changed
+
+- Removed the redundant "Administration" / "Site administration" heading from
+  the dashboard body. The top bar and page title remain.
+- Widened the dashboard category column from 18rem to 20rem.
+
 ## [0.2.6] - 2026-11-15
 
 ### Changed
