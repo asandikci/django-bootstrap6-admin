@@ -23,6 +23,8 @@ python -m django test --settings=tests.settings
 Run the linter and formatter check before opening a pull request:
 
 ```bash
+python -m django test --settings=tests.settings
+node tests/js/theme_toggle.test.js
 ruff check .
 ruff format --check .
 ```

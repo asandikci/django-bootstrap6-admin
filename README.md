@@ -28,6 +28,9 @@ permissions and JavaScript remain in charge.
   preference is synchronised with Bootstrap's `data-bs-theme` attribute.
 - Soft fade-in/fade-out transition when switching themes, skipped
   automatically for users who prefer reduced motion.
+- Every click changes the visible theme: if `auto` would resolve to the theme
+  already on screen, the toggle skips that step instead of appearing to do
+  nothing.
 - Accessible focus states, labels, table headers and ARIA attributes.
 - All Django admin JavaScript hooks are preserved: `actions.js`,
   `filters.js`, `nav_sidebar.js`, inlines, Select2/autocomplete, calendar
@@ -199,6 +202,7 @@ Run the tests and the linter:
 
 ```bash
 python -m django test --settings=tests.settings
+node tests/js/theme_toggle.test.js
 ruff check .
 ruff format --check .
 ```

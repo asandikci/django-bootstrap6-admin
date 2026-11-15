@@ -24,9 +24,10 @@
         if (modes.includes(stored)) {
             return stored;
         }
-        // First visit: start in the effective OS theme so the visible page
-        // and the toggle icon agree immediately. Auto remains in the cycle.
-        return media.matches ? "dark" : "light";
+        // No explicit preference yet: follow the system. Keeping the mode as
+        // "auto" prevents the first click from landing on an auto state that
+        // resolves to the same theme.
+        return "auto";
     }
 
     function updateButtons(mode) {
@@ -43,11 +44,15 @@
         });
     }
 
+    function effectiveMode(mode) {
+        mode = normalize(mode);
+        return mode === "auto" ? (media.matches ? "dark" : "light") : mode;
+    }
+
     function apply(mode) {
         mode = normalize(mode);
         const root = document.documentElement;
-        const effective =
-            mode === "auto" ? (media.matches ? "dark" : "light") : mode;
+        const effective = effectiveMode(mode);
 
         root.dataset.theme = mode;
         root.dataset.effectiveTheme = effective;
@@ -121,6 +126,7 @@
 
     function cycle() {
         const mode = current();
+        const effective = effectiveMode(mode);
         let next;
 
         if (media.matches) {
@@ -129,6 +135,12 @@
         } else {
             next =
                 mode === "auto" ? "dark" : mode === "dark" ? "light" : "auto";
+        }
+
+        // In dark systems auto is dark, and in light systems auto is light.
+        // Skip that no-op step so every click visibly changes the theme.
+        if (effectiveMode(next) === effective) {
+            next = effective === "dark" ? "light" : "dark";
         }
 
         set(next);

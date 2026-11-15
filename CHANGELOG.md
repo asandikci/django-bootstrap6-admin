@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-15
+
+### Fixed
+
+- Clicking the theme toggle in a dark system no longer moves to an `auto`
+  state that resolves to dark and leaves the page unchanged. The toggle skips
+  that no-op step, so a single click always changes the visible theme.
+
 ## [0.1.1] - 2026-11-15
 
 ### Added

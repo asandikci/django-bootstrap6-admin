@@ -33,6 +33,8 @@ jobs:
           ruff format --check .
       - name: Test
         run: python -m django test --settings=tests.settings
+      - name: Test theme toggle
+        run: node tests/js/theme_toggle.test.js
 
   package:
     name: Build and verify distributions
