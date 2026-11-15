@@ -67,3 +67,5 @@ class PackageAssetsTests(SimpleTestCase):
         self.assertIn("--ba-icon-calendar", admin_css)
         self.assertIn("--ba-icon-clock", admin_css)
         self.assertIn("caption-side: top", admin_css)
+        self.assertIn("--ba-row-alt", admin_css)
+        self.assertIn("grid-template-columns: minmax(0, 46rem)", admin_css)

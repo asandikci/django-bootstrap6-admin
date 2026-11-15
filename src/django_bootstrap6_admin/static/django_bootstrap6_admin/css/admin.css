@@ -18,6 +18,7 @@
     --ba-canvas: light-dark(#f6f6f4, #191718);
     --ba-surface: light-dark(#ffffff, #222021);
     --ba-surface-muted: light-dark(#fafaf8, #292627);
+    --ba-row-alt: light-dark(#f2f2ef, #2b2829);
     --ba-border: light-dark(#e3e3df, #3a3637);
     --ba-border-strong: light-dark(#cfcfc8, #4a4546);
     --ba-gold: light-dark(#ffcb08, #d8ab32);
@@ -789,6 +790,11 @@ html[data-effective-theme="dark"] .theme-icon-when-dark {
     border: 0;
 }
 
+.ba-nav-table tr:nth-child(even) > th,
+.ba-nav-table tr:nth-child(even) > td {
+    background: var(--ba-row-alt);
+}
+
 .ba-nav-table th {
     width: 100%;
     font-weight: 500;
@@ -1072,7 +1078,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-dashboard {
     display: grid;
-    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 46rem) minmax(0, 1fr);
     gap: 1rem;
     align-items: start;
 }
@@ -1115,7 +1121,7 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 }
 
 .ba-app-card {
-    width: min(100%, 20rem);
+    width: min(100%, 46rem);
     height: auto;
     overflow: hidden;
     border-color: var(--ba-border);
@@ -1200,6 +1206,14 @@ form:has(#id_usable_password input[value="false"]:checked) .ba-submit-actions .s
 
 .ba-model-list > li:last-child {
     border-block-end: 0;
+}
+
+.ba-model-list > li:nth-child(odd) {
+    background: var(--ba-surface);
+}
+
+.ba-model-list > li:nth-child(even) {
+    background: var(--ba-row-alt);
 }
 
 .ba-model-link {
@@ -1609,6 +1623,24 @@ a.ba-date-chip:focus {
 .ba-history-table tbody th:not(:last-child),
 .ba-history-table tbody td:not(:last-child) {
     border-inline-end: 1px solid var(--bs-border-muted);
+}
+
+#result_list tbody tr:nth-child(odd) > *,
+.ba-inline-table tbody tr:nth-child(odd) > *,
+.ba-history-table tbody tr:nth-child(odd) > * {
+    background: var(--ba-surface);
+}
+
+#result_list tbody tr:nth-child(even) > *,
+.ba-inline-table tbody tr:nth-child(even) > *,
+.ba-history-table tbody tr:nth-child(even) > * {
+    background: var(--ba-row-alt);
+}
+
+#result_list tbody tr:hover > *,
+.ba-inline-table tbody tr:hover > *,
+.ba-history-table tbody tr:hover > * {
+    background: color-mix(in srgb, var(--bs-primary-bg) 7%, var(--ba-surface));
 }
 
 #result_list tbody tr.selected > * {

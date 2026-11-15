@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-11-15
+
+### Changed
+
+- Dashboard category cards are 2.3 times wider (46rem) while keeping the
+  vertical list layout.
+- Added subtle zebra striping to dashboard category rows, the admin sidebar
+  navigation, changelist tables, inline tables and object history tables.
+  Light mode alternates white and warm gray; dark mode alternates the surface
+  and a slightly lighter charcoal.
+
 ## [0.2.7] - 2026-11-15
 
 ### Changed

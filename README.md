@@ -21,6 +21,8 @@ permissions and JavaScript remain in charge.
   with a backdrop (mobile).
 - Dashboard with application cards in a vertical list at a comfortable width,
   model shortcuts and recent actions in the adjacent right-hand column.
+- Subtle alternating row colours in dashboard category lists, the sidebar,
+  changelist, inline and history tables.
 - Changelist with search, date hierarchy, collapsible filters, sortable
   headers, bulk actions and Bootstrap pagination. The desktop filter panel can
   be collapsed, and both its state and the "Show counts" choice are remembered
