@@ -46,3 +46,19 @@ class PackageAssetsTests(SimpleTestCase):
         self.assertIn(".ba-theme-fade", admin_css)
         self.assertIn(".ba-theme-fade.is-active", admin_css)
         self.assertIn("transition: opacity 200ms ease", admin_css)
+
+    def test_changelist_ux_assets(self):
+        static_dir = Path(django_bootstrap6_admin.__file__).parent / "static"
+        admin_js = (static_dir / "django_bootstrap6_admin" / "js" / "admin.js").read_text(
+            encoding="utf-8"
+        )
+        admin_css = (static_dir / "django_bootstrap6_admin" / "css" / "admin.css").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("django.admin.showFacets", admin_js)
+        self.assertIn("django.admin.filtersCollapsed", admin_js)
+        self.assertIn("ba-filters-collapsed", admin_css)
+        self.assertIn("border-inline-end: 1px solid var(--bs-border-muted)", admin_css)
+        self.assertIn("appearance: none", admin_css)
+        self.assertIn("--bs-fg-4: #9fb1c4", admin_css)

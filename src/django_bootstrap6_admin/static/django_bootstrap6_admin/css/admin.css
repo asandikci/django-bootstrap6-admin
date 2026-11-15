@@ -111,6 +111,23 @@
    2. Base
    -------------------------------------------------------------------------- */
 
+/*
+ * Bootstrap's dark gray-500/600 secondary text is too dim on the deep navy
+ * admin surfaces, especially at the small sizes used by filters, table
+ * headers and action help. Lift those tokens for the effective dark theme.
+ */
+[data-bs-theme="dark"],
+[data-effective-theme="dark"] {
+    --bs-fg-1: #f1f5f9;
+    --bs-fg-2: #d7e0ea;
+    --bs-fg-3: #b9c7d6;
+    --bs-fg-4: #9fb1c4;
+    --ba-text-muted: #c9d4e0;
+    --bs-link-color: #8dbcf7;
+    --bs-link-hover-color: #b7d4ff;
+    --bs-border-muted: #34465a;
+}
+
 html {
     min-height: 100%;
 }
@@ -1365,7 +1382,7 @@ a.ba-timeline-object:focus {
 }
 
 .ba-filters-toggle-row {
-    display: none;
+    display: flex;
 }
 
 .ba-filters-toggle {
@@ -1551,6 +1568,20 @@ a.ba-date-chip:focus {
     border-block-end: 0;
 }
 
+/* Very light column rules keep dense admin tables readable without making
+ * every cell look boxed in. */
+#result_list thead th:not(:last-child),
+#result_list tbody th:not(:last-child),
+#result_list tbody td:not(:last-child),
+.ba-inline-table thead th:not(:last-child),
+.ba-inline-table tbody th:not(:last-child),
+.ba-inline-table tbody td:not(:last-child),
+.ba-history-table thead th:not(:last-child),
+.ba-history-table tbody th:not(:last-child),
+.ba-history-table tbody td:not(:last-child) {
+    border-inline-end: 1px solid var(--bs-border-muted);
+}
+
 #result_list tbody tr.selected > * {
     background: var(--bs-primary-bg-subtle) !important;
 }
@@ -1597,6 +1628,7 @@ a.ba-date-chip:focus {
 
 #result_list select {
     padding-inline-end: 1.6rem;
+    appearance: none;
     background-image: var(--ba-select-arrow);
     background-position: right 0.45rem center;
     background-repeat: no-repeat;
@@ -2177,6 +2209,7 @@ label.required::after {
 .ba-form-group select,
 .ba-actions select {
     padding-inline-end: 2rem;
+    appearance: none;
     background-image: var(--ba-select-arrow);
     background-position: right 0.7rem center;
     background-repeat: no-repeat;
@@ -2551,6 +2584,7 @@ div.help ul {
 
 .ba-inline-table select {
     padding-inline-end: 1.6rem;
+    appearance: none;
     background-image: var(--ba-select-arrow);
     background-position: right 0.45rem center;
     background-repeat: no-repeat;
@@ -3201,6 +3235,16 @@ body.popup .ba-submit-row {
 /* --------------------------------------------------------------------------
    13. Responsive
    -------------------------------------------------------------------------- */
+
+@media (min-width: 1200px) {
+    #changelist.ba-filters-collapsed .ba-changelist-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #changelist.ba-filters-collapsed .ba-filters {
+        display: none;
+    }
+}
 
 @media (max-width: 1199.98px) {
     .ba-dashboard {

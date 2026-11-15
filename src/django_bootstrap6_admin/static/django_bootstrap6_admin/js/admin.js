@@ -10,7 +10,10 @@
  */
 (() => {
     const MOBILE = window.matchMedia("(max-width: 1023.98px)");
+    const DESKTOP = window.matchMedia("(min-width: 1200px)");
     const STORAGE_KEY = "django.admin.navSidebarIsOpen";
+    const FILTERS_KEY = "django.admin.filtersCollapsed";
+    const FACETS_KEY = "django.admin.showFacets";
 
     function initSidebar() {
         const main = document.getElementById("main");
@@ -228,16 +231,50 @@
             return;
         }
 
+        const isCollapsed = () =>
+            changelist.classList.contains("ba-filters-collapsed");
+
         const sync = () => {
-            toggle.setAttribute(
-                "aria-expanded",
-                changelist.classList.contains("ba-filters-open")
-                    ? "true"
-                    : "false",
-            );
+            const expanded = DESKTOP.matches
+                ? !isCollapsed()
+                : changelist.classList.contains("ba-filters-open");
+            toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+            if (panel) {
+                panel.toggleAttribute(
+                    "inert",
+                    DESKTOP.matches && isCollapsed(),
+                );
+            }
         };
 
+        const setCollapsed = (collapsed) => {
+            changelist.classList.toggle("ba-filters-collapsed", collapsed);
+            if (DESKTOP.matches) {
+                localStorage.setItem(
+                    FILTERS_KEY,
+                    collapsed ? "true" : "false",
+                );
+            }
+            sync();
+        };
+
+        // Restore the desktop preference. On mobile the panel is a drawer and
+        // the collapsed class has no visual effect.
+        if (DESKTOP.matches && localStorage.getItem(FILTERS_KEY) === "true") {
+            changelist.classList.add("ba-filters-collapsed");
+        }
+
         toggle.addEventListener("click", () => {
+            if (DESKTOP.matches) {
+                const collapsed = !isCollapsed();
+                setCollapsed(collapsed);
+                if (!collapsed) {
+                    const target = panel?.querySelector("summary, a, button");
+                    window.requestAnimationFrame(() => target?.focus());
+                }
+                return;
+            }
+
             changelist.classList.toggle("ba-filters-open");
             sync();
             if (changelist.classList.contains("ba-filters-open")) {
@@ -249,13 +286,67 @@
 
         if (close) {
             close.addEventListener("click", () => {
+                setCollapsed(true);
                 changelist.classList.remove("ba-filters-open");
                 sync();
                 toggle.focus();
             });
         }
 
+        if (DESKTOP.addEventListener) {
+            DESKTOP.addEventListener("change", () => {
+                if (DESKTOP.matches) {
+                    changelist.classList.toggle(
+                        "ba-filters-collapsed",
+                        localStorage.getItem(FILTERS_KEY) === "true",
+                    );
+                    changelist.classList.remove("ba-filters-open");
+                }
+                sync();
+            });
+        }
+
         sync();
+    }
+
+    function initFacetPreference() {
+        const panel = document.getElementById("changelist-filter");
+        if (!panel) {
+            return;
+        }
+
+        const links = document.querySelectorAll(
+            ".ba-filters-actions .hidelink, .ba-filters-actions .viewlink",
+        );
+        if (!links.length) {
+            return;
+        }
+
+        links.forEach((link) => {
+            link.addEventListener("click", () => {
+                const show = link.classList.contains("viewlink");
+                localStorage.setItem(FACETS_KEY, show ? "true" : "false");
+            });
+        });
+
+        const stored = localStorage.getItem(FACETS_KEY);
+        if (stored !== "true" && stored !== "false") {
+            return;
+        }
+
+        const url = new URL(window.location.href);
+        const hasFacets = url.searchParams.has("_facets");
+        const showFacets = stored === "true";
+        if (hasFacets === showFacets) {
+            return;
+        }
+
+        if (showFacets) {
+            url.searchParams.set("_facets", "1");
+        } else {
+            url.searchParams.delete("_facets");
+        }
+        window.location.replace(url.toString());
     }
 
     function initDirtyGuard() {
@@ -327,6 +418,7 @@
     function initAll() {
         initSidebar();
         initFilterDisclosure();
+        initFacetPreference();
         initDirtyGuard();
         initErrorFocus();
         initAccessibility();

@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-15
+
+### Added
+
+- The desktop filter panel can now be collapsed and expanded, and the
+  collapsed state is remembered between changelist pages.
+- The "Show counts" / "Hide counts" choice is remembered across changelist
+  pages instead of resetting on navigation.
+- Subtle vertical rules separate columns in changelists, inline tables and the
+  object history table.
+
+### Fixed
+
+- Removed the duplicate native dropdown arrow on the bulk-action select.
+- Improved dark-theme text contrast for secondary labels, table headers,
+  filter links, help text and links.
+
 ## [0.1.2] - 2026-11-15
 
 ### Fixed

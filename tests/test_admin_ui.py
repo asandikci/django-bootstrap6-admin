@@ -76,6 +76,8 @@ class AdminUiTests(TestCase):
             'id="changelist-search"',
             'id="searchbar"',
             'id="changelist-filter"',
+            'id="ba-filters-toggle"',
+            'id="ba-filters-close"',
             'id="action-toggle"',
             'id="date-hierarchy-label"',
             'class="actions ba-actions"',
@@ -119,7 +121,6 @@ class AdminUiTests(TestCase):
     def test_changelist_search_and_pagination(self):
         response = self.client.get(reverse("admin:testapp_book_changelist"), {"q": "Django"})
         self.assertContains(response, "Django for Everyone")
-
         for index in range(105):
             Book.objects.create(
                 title=f"Extra book {index:03d}",
@@ -133,6 +134,15 @@ class AdminUiTests(TestCase):
         self.assertContains(response, 'class="pagination')
         self.assertContains(response, "?p=1")
         self.assertContains(response, 'aria-current="page">2')
+
+    def test_facet_count_toggle_links(self):
+        url = reverse("admin:testapp_book_changelist")
+
+        response = self.client.get(url)
+        self.assertContains(response, "Show counts")
+
+        response = self.client.get(url, {"_facets": "1"})
+        self.assertContains(response, "Hide counts")
 
     def test_change_form_keeps_widgets_and_submit_contract(self):
         response = self.client.get(reverse("admin:testapp_book_change", args=[self.book.pk]))

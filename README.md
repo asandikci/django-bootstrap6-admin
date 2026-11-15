@@ -20,12 +20,18 @@ permissions and JavaScript remain in charge.
   with a backdrop (mobile).
 - Dashboard with application cards, model shortcuts and recent activity.
 - Changelist with search, date hierarchy, collapsible filters, sortable
-  headers, bulk actions and Bootstrap pagination.
+  headers, bulk actions and Bootstrap pagination. The desktop filter panel can
+  be collapsed, and both its state and the "Show counts" choice are remembered
+  between pages.
+- Subtle vertical rules separate columns in changelists, inline tables and the
+  object history.
 - Change form with card-based fieldsets, collapsible sections, a clear save
   bar, tabular/stacked inlines and related-object popups.
 - Modern login, logout and password change pages.
 - Light, dark and system themes. The existing Django `theme` localStorage
   preference is synchronised with Bootstrap's `data-bs-theme` attribute.
+- Dark-theme secondary text, table headers, filter links and help text use
+  higher-contrast tokens for better readability.
 - Soft fade-in/fade-out transition when switching themes, skipped
   automatically for users who prefer reduced motion.
 - Every click changes the visible theme: if `auto` would resolve to the theme
